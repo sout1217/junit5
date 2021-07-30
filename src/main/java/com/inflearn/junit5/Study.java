@@ -1,6 +1,16 @@
 package com.inflearn.junit5;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Study {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private final StudyStatus status = StudyStatus.DRAFT;
     private int limit;
@@ -42,5 +52,8 @@ public class Study {
                 ", limit=" + limit +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public void setOwner(Member member) {
     }
 }
