@@ -1,42 +1,37 @@
 package com.inflearn.junit5;
 
 
-import org.junit.jupiter.api.*;
+import com.inflearn.junit5.annotations.SlowTest;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 public class StudyTest {
 
-    int value = 1;
+    // RegisterExtension 방법
+    @RegisterExtension
+    static FindSlowTestExtension findSlowTestExtension = new FindSlowTestExtension(1000L);
 
-    @Order(2)
     @Test
-    @Disabled
-    void test1() {
-        System.out.println("test 1");
-        System.out.println(value++);
+    void normalTest() {
+        System.out.println("normalTest");
     }
 
-    @Order(1)
     @Test
-    void test2() {
-        System.out.println("test 2");
-        System.out.println(value++);
-
+    void slowTest() throws InterruptedException {
+        Thread.sleep(2000);
+        System.out.println("slow test ~");
     }
 
-    @Order(4)
     @Test
-    void test3() {
-        System.out.println("test 3");
-        System.out.println(value++);
+    void fastTest() {
+        System.out.println("fast test ~ ");
 
     }
 
-    @Order(3)
-    @Test
-    void test4() {
-        System.out.println("test 4");
-        System.out.println(value++);
-
+    @SlowTest
+    void verySlow() throws InterruptedException {
+        Thread.sleep(3000);
+        System.out.println("very Slow");
     }
 }
