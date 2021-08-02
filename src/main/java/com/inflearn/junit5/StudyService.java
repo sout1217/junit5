@@ -2,7 +2,8 @@ package com.inflearn.junit5;
 
 import java.util.Optional;
 
-public class StudyService {
+public class
+StudyService {
 
     private final MemberService memberService;
     private final StudyRepository studyRepository;

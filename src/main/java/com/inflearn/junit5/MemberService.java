@@ -6,4 +6,5 @@ public interface MemberService {
 
     Optional<Member> findById(Long memberId) throws IllegalArgumentException;
 
+    void validate(Long memberId);
 }
