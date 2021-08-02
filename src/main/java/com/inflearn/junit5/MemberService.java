@@ -7,4 +7,8 @@ public interface MemberService {
     Optional<Member> findById(Long memberId) throws IllegalArgumentException;
 
     void validate(Long memberId);
+
+    void notify(Study study);
+
+    void notify(Member member);
 }

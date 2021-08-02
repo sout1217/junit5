@@ -2,8 +2,7 @@ package com.inflearn.junit5;
 
 import java.util.Optional;
 
-public class
-StudyService {
+public class StudyService {
 
     private final MemberService memberService;
     private final StudyRepository studyRepository;
@@ -16,9 +15,14 @@ StudyService {
     }
 
     public Study createNewStudy(Long memberId, Study study) {
-        Optional<Member> member = memberService.findById(memberId);
+        Optional<Member> optionalMember = memberService.findById(memberId);
 
-        study.setOwner(member.orElseThrow(() -> new IllegalArgumentException("아이디가 없습니다")));
+        study.setOwner(optionalMember.orElseThrow(() -> new IllegalArgumentException("아이디가 없습니다")));
+
+        Member member = optionalMember.get();
+
+        memberService.notify(study);
+        memberService.notify(member);
 
         return studyRepository.save(study);
     }
